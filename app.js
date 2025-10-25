@@ -27,6 +27,21 @@ const translations = {
     , generatedEmail: 'Generated Email'
     , generatedLetter: 'Generated Letter'
     , generatedText: 'Generated Text'
+    , helpTitle: 'How to Use This App'
+    , helpIntro: 'This app helps you opt out of data broker and marketing sites and guides you through each step in a clear, accessible way.'
+    , helpList1: 'Browse categories and select a broker or resource to see detailed instructions.'
+    , helpList2: 'For People Search sites, you can fill out the form with your details, generate an email or letter, and follow the digital journey steps.'
+    , helpList3: 'For other categories, simply read the informational text and follow any provided links or phone numbers.'
+    , helpList4: 'You can reorder steps in the digital journey by dragging and dropping them.'
+    , symbolTitle: 'Symbol meanings'
+    , symbolHeaderSymbol: 'Symbol'
+    , symbolHeaderMeaning: 'Meaning'
+    , symbolCrucial: 'crucial'
+    , symbolHigh: 'high priority'
+    , symbolLicense: 'requires driver’s license (cross out your ID #!)'
+    , symbolPhone: 'must pick up a (gasp!) phone'
+    , symbolCharges: 'site charges money for access or removal'
+    , helpLanguageNote: 'Use the language selector to switch between English and Spanish. If you generate an email or letter in Spanish, the app will translate it back to English when you send or print.'
   },
   es: {
     name: 'Nombre',
@@ -49,6 +64,21 @@ const translations = {
     , generatedEmail: 'Correo generado'
     , generatedLetter: 'Carta generada'
     , generatedText: 'Texto generado'
+    , helpTitle: 'Cómo usar esta aplicación'
+    , helpIntro: 'Esta aplicación le ayuda a excluirse de corredores de datos y sitios de marketing y lo guía paso a paso de manera clara y accesible.'
+    , helpList1: 'Explore las categorías y seleccione un corredor o recurso para ver instrucciones detalladas.'
+    , helpList2: 'Para sitios de búsqueda de personas, puede completar el formulario con sus datos, generar un correo o carta y seguir los pasos del recorrido digital.'
+    , helpList3: 'Para otras categorías, simplemente lea el texto informativo y siga los enlaces o números de teléfono proporcionados.'
+    , helpList4: 'Puede reordenar los pasos del recorrido digital arrastrándolos y soltándolos.'
+    , symbolTitle: 'Significado de los símbolos'
+    , symbolHeaderSymbol: 'Símbolo'
+    , symbolHeaderMeaning: 'Significado'
+    , symbolCrucial: 'crucial'
+    , symbolHigh: 'alta prioridad'
+    , symbolLicense: 'requiere licencia de conducir (tache su ID!)'
+    , symbolPhone: 'hay que levantar el teléfono'
+    , symbolCharges: 'el sitio cobra dinero por acceso o eliminación'
+    , helpLanguageNote: 'Use el selector de idioma para cambiar entre inglés y español. Si genera un correo o carta en español, la aplicación lo traducirá al inglés cuando lo envíe o imprima.'
   }
 };
 
@@ -416,6 +446,32 @@ function sanitizeInstructions(md) {
   return text.trim();
 }
 
+// Convert plain text containing URLs, emails and phone numbers into clickable HTML
+function linkifyText(text) {
+  if (!text) return '';
+  let html = text;
+  // Convert URLs
+  const urlRegex = /(https?:\/\/[^\s]+)/g;
+  html = html.replace(urlRegex, (match) => {
+    return `<a href="${match}" target="_blank">${match}</a>`;
+  });
+  // Convert email addresses
+  const emailRegex = /([A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,})/g;
+  html = html.replace(emailRegex, (match) => {
+    return `<a href="mailto:${match}">${match}</a>`;
+  });
+  // Convert phone numbers like 1 (800) 349-9960 or 888-397‑3742; capture digits
+  const phoneRegex = /(\d[\d\s\-()]{6,}\d)/g;
+  html = html.replace(phoneRegex, (match) => {
+    // Remove non-digit characters to create tel link
+    const tel = match.replace(/[^\d+]/g, '');
+    return `<a href="tel:${tel}">${match}</a>`;
+  });
+  // Replace newlines with <br>
+  html = html.replace(/\n/g, '<br/>');
+  return html;
+}
+
 // Helper to remove emoji characters from a string
 function removeEmojis(str) {
   try {
@@ -484,8 +540,17 @@ function parseReadme(readme) {
     const end = (i + 1 < cats.length) ? cats[i + 1].index : readme.length;
     const name = cats[i].name;
     const section = readme.slice(start, end);
+    // Determine informational text before any ### headings
+    let info = '';
+    const headingMatch = section.match(/^\s*###\s+/m);
+    if (headingMatch) {
+      const idx = section.indexOf(headingMatch[0]);
+      info = section.slice(0, idx).trim();
+    } else {
+      info = section.trim();
+    }
     const brokers = parseBrokers(section);
-    categories.push({ name, brokers });
+    categories.push({ name, info, brokers });
   }
   return categories;
 }
@@ -543,54 +608,57 @@ async function loadBrokerData() {
     const parsed = parseReadme(text);
     // Override People Search Sites with custom definitions
     parsed.forEach(cat => {
-      if (cat.name.toLowerCase().includes('people search')) {
-        cat.brokers = cat.brokers.map(b => {
-          if (customBrokers[b.name]) {
-            const custom = customBrokers[b.name];
-            return {
-              name: b.name,
-              instructions: custom.instructions.en,
-              instructionsEs: custom.instructions.es,
-              emails: custom.emails,
-              phones: custom.phones,
-              links: custom.links,
-              journey: custom.journey
-            };
+      const isPeople = cat.name.toLowerCase().includes('people search');
+      cat.brokers = cat.brokers.map(b => {
+        // Attempt to match broker name to a key in customBrokers (case-insensitive, partial match)
+        let matchedKey = null;
+        for (const key of Object.keys(customBrokers)) {
+          if (b.name.toLowerCase().includes(key.toLowerCase())) {
+            matchedKey = key;
+            break;
           }
-          return b;
-        });
-      }
+        }
+        if (matchedKey) {
+          const custom = customBrokers[matchedKey];
+          return {
+            name: b.name,
+            instructions: custom.instructions.en,
+            instructionsEs: custom.instructions.es,
+            emails: custom.emails,
+            phones: custom.phones,
+            links: custom.links,
+            journey: custom.journey,
+            peopleSearch: true
+          };
+        }
+        // For brokers under People Search, mark as peopleSearch even if no custom match
+        return { ...b, peopleSearch: isPeople };
+      });
+      // If no brokers but info exists, leave info as is; PeopleSearch property is not needed
     });
     return parsed;
   } catch (err) {
     console.warn('Failed to fetch live data, falling back to sample.', err);
     // Fallback: minimal sample dataset for offline or when GitHub is inaccessible
+    // Use a fallback dataset that mirrors the People Search custom definitions to ensure
+    // Spanish instructions and journeys are available when the live README cannot be fetched.
     return [
       {
         name: 'People Search Sites',
-        brokers: [
-          {
-            name: 'BeenVerified',
-            instructions: 'Find your information and opt out of people search and property search. Confirm via email.',
-            emails: [],
-            phones: [],
-            links: []
-          },
-          {
-            name: 'Dataveria',
-            instructions: 'Find your profile on dataveria.com and enter the URL into the opt‑out form. If the form fails, email support@federal-data.com.',
-            emails: ['support@federal-data.com'],
-            phones: [],
-            links: []
-          },
-          {
-            name: 'MyLife',
-            instructions: 'Opt out via the CCPA portal or email privacy@mylife.com with your name and profile link.',
-            emails: ['privacy@mylife.com'],
-            phones: ['888-704-1900'],
-            links: []
-          }
-        ]
+        info: '',
+        brokers: Object.keys(customBrokers).map(key => {
+          const custom = customBrokers[key];
+          return {
+            name: key,
+            instructions: custom.instructions.en,
+            instructionsEs: custom.instructions.es,
+            emails: custom.emails,
+            phones: custom.phones,
+            links: custom.links,
+            journey: custom.journey,
+            peopleSearch: true
+          };
+        })
       }
     ];
   }
@@ -609,6 +677,15 @@ function renderCategories(categoriesData) {
     const toggleIcon = document.createElement('span');
     toggleIcon.textContent = '+';
     header.appendChild(toggleIcon);
+    // Create informational div if any
+    let infoDiv = null;
+    if (cat.info && cat.info.trim().length > 0) {
+      infoDiv = document.createElement('div');
+      infoDiv.className = 'category-info';
+      infoDiv.innerHTML = linkifyText(sanitizeInstructions(cat.info));
+      // Hide initially
+      infoDiv.style.display = 'none';
+    }
     const listEl = document.createElement('ul');
     listEl.className = 'category-brokers';
     cat.brokers.forEach(broker => {
@@ -629,8 +706,14 @@ function renderCategories(categoriesData) {
     header.addEventListener('click', () => {
       const visible = listEl.classList.toggle('visible');
       toggleIcon.textContent = visible ? '-' : '+';
+      if (infoDiv) {
+        infoDiv.style.display = visible ? 'block' : 'none';
+      }
     });
     li.appendChild(header);
+    if (infoDiv) {
+      li.appendChild(infoDiv);
+    }
     li.appendChild(listEl);
     container.appendChild(li);
   });
@@ -690,12 +773,27 @@ function openBrokerModal(broker) {
       instructions = translateInstructionSegmentsToSpanish(instructions);
     }
   }
-  brokerInstructionsEl.textContent = instructions;
+  // Display instructions with clickable links and emails
+  brokerInstructionsEl.innerHTML = linkifyText(instructions);
   // Reset user inputs
-  document.getElementById('user-input-form').reset();
+  const formEl = document.getElementById('user-input-form');
+  formEl.reset();
   outputContainerEl.classList.add('hidden');
-  // Load or generate journey
-  loadOrGenerateJourney(broker);
+  // Show or hide form and journey depending on category
+  const journeyContainer = document.getElementById('journey-container');
+  const actionsContainer = document.querySelector('.actions');
+  if (broker.peopleSearch) {
+    formEl.style.display = '';
+    actionsContainer.style.display = '';
+    journeyContainer.style.display = '';
+    // Load or generate journey
+    loadOrGenerateJourney(broker);
+  } else {
+    // Hide user form and actions for non‑people categories
+    formEl.style.display = 'none';
+    actionsContainer.style.display = 'none';
+    journeyContainer.style.display = 'none';
+  }
   modalEl.classList.remove('hidden');
 }
 
@@ -764,7 +862,7 @@ function generateEmail() {
     let englishBody;
     if (currentLanguage === 'es') {
       englishBody = await translateToEnglish(content);
-      if (!englishBody) englishBody = generatedEmailEn;
+      if (!englishBody) englishBody = content;
     } else {
       englishBody = content;
     }
@@ -839,7 +937,7 @@ function generateLetter() {
     let englishContent;
     if (currentLanguage === 'es') {
       englishContent = await translateToEnglish(content);
-      if (!englishContent) englishContent = generatedLetterEn;
+      if (!englishContent) englishContent = content;
     } else {
       englishContent = content;
     }
@@ -1027,7 +1125,8 @@ function renderJourney(name) {
   // Update controls: disable prev at first step, disable next if at last or completed
   const prevBtn = document.getElementById('journey-prev');
   const nextBtn = document.getElementById('journey-next');
-  prevBtn.disabled = (journey.currentStep === 0 || journey.completed);
+  // Disable previous button only at first step; allow going back even when completed
+  prevBtn.disabled = (journey.currentStep === 0);
   const atLastStep = journey.currentStep >= steps.length - 1;
   // Do not disable next button at last step; clicking will mark completion
   nextBtn.disabled = journey.completed;
@@ -1276,6 +1375,27 @@ async function init() {
       overlay.classList.add('hidden');
       // re-render categories to show completed check
       renderCategories(categories);
+    });
+  }
+
+  // Help modal events
+  const helpBtn = document.getElementById('help-button');
+  const helpModal = document.getElementById('help-modal');
+  const helpClose = document.getElementById('help-close');
+  if (helpBtn && helpModal) {
+    helpBtn.addEventListener('click', () => {
+      helpModal.classList.remove('hidden');
+    });
+    if (helpClose) {
+      helpClose.addEventListener('click', () => {
+        helpModal.classList.add('hidden');
+      });
+    }
+    // Close help modal when clicking outside the content
+    helpModal.addEventListener('click', (e) => {
+      if (e.target === helpModal) {
+        helpModal.classList.add('hidden');
+      }
     });
   }
   // Click outside modal content to close

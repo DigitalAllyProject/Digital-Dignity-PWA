@@ -30,6 +30,21 @@ header {
     flex-wrap: wrap;
 }
 
+/* Help button */
+.help-button {
+    background-color: var(--sunset-orange);
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 0.5rem 0.75rem;
+    margin-left: 1rem;
+    cursor: pointer;
+    font-size: 0.9rem;
+}
+.help-button:hover {
+    opacity: 0.9;
+}
+
 #app-title {
     margin: 0;
     font-size: 1.5rem;
@@ -142,6 +157,36 @@ main {
 
 .category-brokers li:last-child {
     border-bottom: none;
+}
+
+/* Category info section shown under each category when expanded */
+.category-info {
+    padding: 0.75rem;
+    border-top: 1px solid var(--slate-gray);
+    background-color: var(--cloud-white);
+    font-size: 0.9rem;
+    line-height: 1.4;
+}
+.category-info a {
+    color: var(--electric-indigo);
+    text-decoration: underline;
+    word-break: break-word;
+}
+
+/* Emoji table in help modal */
+.emoji-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1rem;
+}
+.emoji-table th, .emoji-table td {
+    border: 1px solid var(--slate-gray);
+    padding: 0.5rem;
+    text-align: left;
+}
+.emoji-table th {
+    background-color: var(--midnight-blue);
+    color: white;
 }
 
 /* Modal styles */

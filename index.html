@@ -22,6 +22,7 @@
                 <option value="es">Español</option>
             </select>
         </div>
+        <button id="help-button" class="help-button">Instructions</button>
     </header>
 
     <!-- Main content area -->
@@ -105,6 +106,35 @@
                 <p>You have completed all the steps for this broker. Great job! Have you completed all tasks?</p>
                 <button id="close-celebration" class="primary">OK</button>
             </div>
+        </div>
+    </div>
+
+    <!-- Help modal for app instructions -->
+    <div id="help-modal" class="modal hidden">
+        <div class="modal-content">
+            <button id="help-close" aria-label="Close" class="close-button">&times;</button>
+            <h2 data-i18n="helpTitle">How to Use This App</h2>
+            <p data-i18n="helpIntro">This app helps you opt out of data broker and marketing sites and guides you through each step in a clear, accessible way.</p>
+            <ul>
+                <li data-i18n="helpList1">Browse categories and select a broker or resource to see detailed instructions.</li>
+                <li data-i18n="helpList2">For People Search sites, you can fill out the form with your details, generate an email or letter, and follow the digital journey steps.</li>
+                <li data-i18n="helpList3">For other categories, simply read the informational text and follow any provided links or phone numbers.</li>
+                <li data-i18n="helpList4">You can reorder steps in the digital journey by dragging and dropping them.</li>
+            </ul>
+            <h3 data-i18n="symbolTitle">Symbol meanings</h3>
+            <table class="emoji-table">
+                <thead>
+                    <tr><th data-i18n="symbolHeaderSymbol">Symbol</th><th data-i18n="symbolHeaderMeaning">Meaning</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>💐</td><td data-i18n="symbolCrucial">crucial</td></tr>
+                    <tr><td>☠</td><td data-i18n="symbolHigh">high priority</td></tr>
+                    <tr><td>🎫</td><td data-i18n="symbolLicense">requires driver’s license (cross out your ID #!)</td></tr>
+                    <tr><td>📞</td><td data-i18n="symbolPhone">must pick up a (gasp!) phone</td></tr>
+                    <tr><td>💰</td><td data-i18n="symbolCharges">site charges money for access or removal</td></tr>
+                </tbody>
+            </table>
+            <p data-i18n="helpLanguageNote">Use the language selector to switch between English and Spanish. If you generate an email or letter in Spanish, the app will translate it back to English when you send or print.</p>
         </div>
     </div>
 
