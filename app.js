@@ -861,11 +861,8 @@ function generateEmail() {
       const content = outputTextEl.value;
       let englishBody;
       if (currentLanguage === 'es') {
-        englishBody = await translateToEnglish(content);
-        // If translation fails or returns the same text, fall back to original English template
-        if (!englishBody || englishBody.trim() === content.trim()) {
-          englishBody = generatedEmailEn;
-        }
+        // Always use the original English template when sending the email from Spanish mode.
+        englishBody = generatedEmailEn;
       } else {
         englishBody = content;
       }
@@ -939,11 +936,8 @@ function generateLetter() {
     const content = outputTextEl.value;
     let englishContent;
     if (currentLanguage === 'es') {
-      englishContent = await translateToEnglish(content);
-      // If translation fails or returns identical text, use original English template
-      if (!englishContent || englishContent.trim() === content.trim()) {
-        englishContent = generatedLetterEn;
-      }
+      // Always use the original English letter template when printing from Spanish mode.
+      englishContent = generatedLetterEn;
     } else {
       englishContent = content;
     }
