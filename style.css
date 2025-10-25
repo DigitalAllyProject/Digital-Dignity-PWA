@@ -1,0 +1,408 @@
+/* Color palette based on provided branding */
+:root {
+    --midnight-blue: #1A2A6C;
+    --electric-indigo: #6A11CB;
+    --sky-blue: #00C6FF;
+    --soft-coral: #FF6F61;
+    --sunset-orange: #FF5E3A;
+    --mint-green: #A8E6CF;
+    --charcoal-gray: #333333;
+    --cloud-white: #F9F9F9;
+    --slate-gray: #7D7D7D;
+}
+
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background-color: var(--cloud-white);
+    color: var(--charcoal-gray);
+}
+
+header {
+    background-color: var(--midnight-blue);
+    color: white;
+    padding: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+#app-title {
+    margin: 0;
+    font-size: 1.5rem;
+}
+
+.language-select {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: white;
+}
+
+.language-select select {
+    padding: 0.25rem;
+    border-radius: 4px;
+    border: none;
+    background-color: var(--electric-indigo);
+    color: white;
+}
+
+main {
+    padding: 1rem;
+    max-width: 960px;
+    margin: 0 auto;
+}
+
+.card {
+    background-color: white;
+    border: 1px solid var(--slate-gray);
+    border-radius: 8px;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.search-list {
+    margin-top: 1rem;
+}
+
+#search-input {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid var(--slate-gray);
+    border-radius: 4px;
+    margin-bottom: 1rem;
+}
+
+/* Category and broker list styling */
+.category-list,
+.category-list ul {
+    list-style: none;
+    padding-left: 0;
+    margin: 0;
+}
+
+.category-item {
+    margin-bottom: 0.5rem;
+    border: 1px solid var(--slate-gray);
+    border-radius: 4px;
+    background-color: white;
+}
+
+.category-header {
+    padding: 0.75rem;
+    background-color: var(--midnight-blue);
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+}
+
+.category-header:hover {
+    background-color: var(--electric-indigo);
+}
+
+.category-brokers {
+    padding: 0;
+    margin: 0;
+    display: none;
+    border-top: 1px solid var(--slate-gray);
+}
+
+.category-brokers.visible {
+    display: block;
+}
+
+.category-brokers li {
+    padding: 0.75rem;
+    border-bottom: 1px solid var(--slate-gray);
+    cursor: pointer;
+    background-color: white;
+    transition: background-color 0.2s ease;
+}
+
+/* Mark completed brokers with a checkmark or different color */
+.category-brokers li.completed-broker::after {
+    content: '✓';
+    margin-left: 0.5rem;
+    color: var(--mint-green);
+    font-weight: bold;
+}
+.category-brokers li.completed-broker {
+    color: var(--mint-green);
+}
+
+.category-brokers li:hover {
+    background-color: var(--mint-green);
+}
+
+.category-brokers li:last-child {
+    border-bottom: none;
+}
+
+/* Modal styles */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal.hidden {
+    display: none;
+}
+
+.modal-content {
+    background-color: white;
+    padding: 1rem;
+    border-radius: 8px;
+    max-width: 640px;
+    width: 90%;
+    max-height: 90%;
+    overflow-y: auto;
+    position: relative;
+}
+
+.close-button {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: var(--slate-gray);
+}
+
+.instructions {
+    margin-bottom: 1rem;
+}
+
+form#user-input-form {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+form#user-input-form label {
+    display: flex;
+    flex-direction: column;
+    font-size: 0.9rem;
+}
+
+form#user-input-form input,
+form#user-input-form textarea {
+    padding: 0.5rem;
+    border: 1px solid var(--slate-gray);
+    border-radius: 4px;
+    margin-top: 0.25rem;
+}
+
+.actions {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 1rem;
+}
+
+.actions button {
+    flex: 1;
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1rem;
+    color: white;
+}
+
+.actions button.primary {
+    background-color: var(--electric-indigo);
+}
+
+.actions button.secondary {
+    background-color: var(--soft-coral);
+}
+
+.output {
+    margin-top: 1rem;
+}
+
+.output.hidden {
+    display: none;
+}
+
+#output-text {
+    width: 100%;
+    padding: 0.5rem;
+    border: 1px solid var(--slate-gray);
+    border-radius: 4px;
+    font-family: monospace;
+    resize: vertical;
+}
+
+.output-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.5rem;
+    margin-top: 0.5rem;
+}
+
+.output-actions button,
+.output-actions a {
+    padding: 0.5rem 0.75rem;
+    border: none;
+    border-radius: 4px;
+    text-decoration: none;
+    font-size: 0.9rem;
+    color: white;
+    background-color: var(--sunset-orange);
+    cursor: pointer;
+}
+
+/* Digital Journey styles */
+.journey {
+    margin-top: 1rem;
+}
+
+.journey-steps {
+    padding-left: 1rem;
+}
+
+.journey-steps li {
+    margin-bottom: 0.5rem;
+    line-height: 1.4;
+    user-select: none;
+}
+
+/* Draggable journey steps */
+.journey-steps li[draggable="true"] {
+    cursor: move;
+}
+.journey-steps li.dragging {
+    opacity: 0.5;
+}
+.journey-steps li.drag-over {
+    border: 2px dashed var(--electric-indigo);
+    border-radius: 4px;
+}
+
+.journey-controls {
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.5rem;
+    margin-top: 0.5rem;
+}
+
+.journey-controls button {
+    flex: 1;
+    padding: 0.5rem;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    color: white;
+}
+
+.journey-controls .primary {
+    background-color: var(--electric-indigo);
+}
+
+.journey-controls .secondary {
+    background-color: var(--soft-coral);
+}
+
+/* Celebration overlay */
+.celebration {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.7);
+    z-index: 2000;
+}
+
+.celebration.hidden {
+    display: none;
+}
+
+.celebration-content {
+    background-color: white;
+    border-radius: 8px;
+    padding: 2rem;
+    text-align: center;
+    max-width: 400px;
+    color: var(--charcoal-gray);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    position: relative;
+}
+
+/* Confetti pieces */
+.confetti-piece {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    opacity: 0.8;
+    border-radius: 2px;
+    pointer-events: none;
+    animation-name: confetti-fall;
+    animation-timing-function: linear;
+    animation-iteration-count: 1;
+}
+
+@keyframes confetti-fall {
+    0% {
+        transform: translateY(-20px) rotate(0deg);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(600px) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+.output-actions button:hover,
+.output-actions a:hover {
+    opacity: 0.9;
+}
+
+footer {
+    padding: 1rem;
+    background-color: var(--midnight-blue);
+    color: white;
+    text-align: center;
+    font-size: 0.9rem;
+}
+
+@media (prefers-color-scheme: dark) {
+    /* Minimal dark mode adjustments */
+    body {
+        background-color: #121212;
+        color: #e0e0e0;
+    }
+    header, footer {
+        background-color: var(--electric-indigo);
+    }
+    .card, .modal-content {
+        background-color: #1e1e1e;
+        color: #e0e0e0;
+    }
+    #search-input, form#user-input-form input, form#user-input-form textarea, #output-text {
+        background-color: #2a2a2a;
+        color: #e0e0e0;
+        border-color: var(--slate-gray);
+    }
+}

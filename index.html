@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#1A2A6C" />
+    <link rel="manifest" href="./manifest.json" />
+    <!-- Favicon and icons -->
+    <link rel="icon" type="image/png" sizes="192x192" href="./icon-192.png" />
+    <link rel="apple-touch-icon" type="image/png" sizes="512x512" href="./icon-512.png" />
+    <link rel="stylesheet" href="./style.css" />
+    <title>Data Broker Opt‑Out Helper</title>
+</head>
+<body>
+    <!-- Header with title and language selector -->
+    <header>
+        <h1 id="app-title">Data Broker Opt‑Out Helper</h1>
+        <div class="language-select">
+            <label for="lang-select">Language:</label>
+            <select id="lang-select">
+                <option value="en">English</option>
+                <option value="es">Español</option>
+            </select>
+        </div>
+    </header>
+
+    <!-- Main content area -->
+    <main>
+        <!-- Instructions summary -->
+        <section id="instructions" class="card">
+            <p id="intro-text">
+                Loading list of data brokers…
+            </p>
+        </section>
+
+        <!-- Search and list of brokers grouped by category -->
+        <section class="search-list">
+            <input id="search-input" type="text" placeholder="Search brokers…" aria-label="Search brokers" />
+            <ul id="category-list" class="category-list"></ul>
+        </section>
+    </main>
+
+    <!-- Modal for broker details -->
+    <div id="broker-modal" class="modal hidden">
+        <div class="modal-content">
+            <button id="modal-close" aria-label="Close" class="close-button">&times;</button>
+            <h2 id="broker-name"></h2>
+            <div id="broker-instructions" class="instructions"></div>
+            <div id="journey-container" class="journey hidden">
+                <h3 data-i18n="digitalJourney">Digital Journey</h3>
+                <ol id="journey-steps" class="journey-steps"></ol>
+                <div class="journey-controls">
+                    <button id="journey-prev" class="secondary" data-i18n="previous">Previous</button>
+                    <button id="journey-next" class="primary" data-i18n="next">Next</button>
+                </div>
+                <div class="journey-add">
+                    <input type="text" id="new-step" placeholder="Add your own step" />
+                    <button id="add-step" class="accent" data-i18n="addStep">Add Step</button>
+                </div>
+            </div>
+            <form id="user-input-form">
+                <h3 data-i18n="enterDetails">Enter your details</h3>
+                <label>
+                    <span data-i18n="name">Name</span>
+                    <input type="text" id="input-name" required />
+                </label>
+                <label>
+                    <span data-i18n="email">Email</span>
+                    <input type="email" id="input-email" required />
+                </label>
+                <label>
+                    <span data-i18n="phone">Phone</span>
+                    <input type="tel" id="input-phone" />
+                </label>
+                <label>
+                    <span data-i18n="profileLink">Profile link (if required)</span>
+                    <input type="url" id="input-link" />
+                </label>
+                <label>
+                    <span data-i18n="address">Mailing address (for letters)</span>
+                    <textarea id="input-address" rows="2"></textarea>
+                </label>
+            </form>
+            <div class="actions">
+                <button id="generate-email" class="primary">Generate Email</button>
+                <button id="generate-letter" class="secondary">Generate Letter</button>
+            </div>
+            <div id="output-container" class="output hidden">
+                <h3 id="output-title" data-i18n="generatedText">Generated Text</h3>
+                <textarea id="output-text" rows="8"></textarea>
+                <div class="output-actions">
+                    <!-- Copy the generated text to clipboard -->
+                    <button id="copy-output" class="accent" data-i18n="copy">Copy</button>
+                    <!-- Action button: opens email client or prints letter depending on context -->
+                    <button id="action-button" class="primary">Action</button>
+                    <!-- Hidden mailto link used for opening the email client after translation -->
+                    <a id="mailto-link" class="accent" href="#" target="_blank" style="display:none">Open Email</a>
+                </div>
+            </div>
+        </div>
+        <!-- Celebration overlay for journey completion -->
+        <div id="celebration-overlay" class="celebration hidden" role="alert">
+            <div class="celebration-content">
+                <h2>Journey Completed!</h2>
+                <p>You have completed all the steps for this broker. Great job! Have you completed all tasks?</p>
+                <button id="close-celebration" class="primary">OK</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>
+            <span data-i18n="footerThanks">This project is maintained by the Digital Ally Project.</span>
+            <a href="mailto:contact@digitalally.org">contact@digitalally.org</a>
+        </p>
+    </footer>
+
+    <script src="./app.js"></script>
+</body>
+</html>
