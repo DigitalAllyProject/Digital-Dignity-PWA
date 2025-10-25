@@ -43,6 +43,12 @@ const translations = {
     , symbolCharges: 'site charges money for access or removal'
     , helpLanguageNote: 'Use the language selector to switch between English and Spanish. If you generate an email or letter in Spanish, the app will translate it back to English when you send or print.'
     , shareJourney: 'Share Journey'
+    , installTitle: 'Install on your device'
+    , installIntro: 'You can save this web app to your device for offline access. Here\'s how:'
+    , installAndroid: 'Android (Chrome, Edge, Opera): Open the menu (⋮) and tap “Add to Home screen” or “Install app”.'
+    , installIos: 'iPhone / iPad (Safari): Tap the Share button, then “Add to Home Screen.” (Only Safari supports installing PWAs on iOS.)'
+    , installDesktop: 'Windows & macOS (Chrome, Edge, Opera): Look for the install icon in the address bar or go to the browser menu (⋮), choose “Install app” or “Apps” > “Install this site as an app.”'
+    , installOther: 'Other browsers: Some browsers like DuckDuckGo don’t yet support installing PWAs. You can still bookmark the site in your browser.'
   },
   es: {
     name: 'Nombre',
@@ -81,6 +87,12 @@ const translations = {
     , symbolCharges: 'el sitio cobra dinero por acceso o eliminación'
     , helpLanguageNote: 'Use el selector de idioma para cambiar entre inglés y español. Si genera un correo o carta en español, la aplicación lo traducirá al inglés cuando lo envíe o imprima.'
     , shareJourney: 'Compartir recorrido'
+    , installTitle: 'Instalar en su dispositivo'
+    , installIntro: 'Puede guardar esta aplicación web en su dispositivo para usarla sin conexión. Así es como:'
+    , installAndroid: 'Android (Chrome, Edge, Opera): Abra el menú (⋮) y toque “Añadir a la pantalla de inicio” o “Instalar aplicación”.'
+    , installIos: 'iPhone / iPad (Safari): Toque el botón Compartir y luego “Añadir a pantalla de inicio”. (Solo Safari admite instalar PWAs en iOS.)'
+    , installDesktop: 'Windows y macOS (Chrome, Edge, Opera): Busque el icono de instalación en la barra de direcciones o vaya al menú del navegador (⋮), elija “Instalar aplicación” o “Aplicaciones” > “Instalar este sitio como una aplicación.”'
+    , installOther: 'Otros navegadores: Algunos navegadores, como DuckDuckGo, todavía no admiten la instalación de PWAs. Aún puede marcar el sitio en su navegador.'
   }
 };
 
