@@ -1266,7 +1266,7 @@ function shareJourney() {
   steps.forEach((step, idx) => {
     body += `${idx + 1}. ${step}\n`;
   });
-  body += '\nI found these steps ${journey.completed ? 'complete' : 'still in progress'}. Here are my comments and suggestions (please edit as needed):\n\n`;
+  body += `\nI found these steps ${journey.completed ? 'complete' : 'still in progress'}. Here are my comments and suggestions (please edit as needed):\n\n`;
   // Open mailto link
   const mailto = `mailto:contact@digitalally.org?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
   mailtoLinkEl.href = mailto;
