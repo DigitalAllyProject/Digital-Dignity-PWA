@@ -856,22 +856,25 @@ function generateEmail() {
   // Setup action button for email
   const actionBtn = document.getElementById('action-button');
   actionBtn.textContent = currentLanguage === 'es' ? 'Abrir correo' : 'Open Email';
-  actionBtn.onclick = async () => {
-    // Get current text from textarea (possibly edited)
-    const content = outputTextEl.value;
-    let englishBody;
-    if (currentLanguage === 'es') {
-      englishBody = await translateToEnglish(content);
-      if (!englishBody) englishBody = content;
-    } else {
-      englishBody = content;
-    }
-    const mailtoBody = encodeURIComponent(englishBody);
-    const mailto = 'mailto:' + encodeURIComponent(generatedTo) + '?subject=' + encodeURIComponent(generatedSubject) + '&body=' + mailtoBody;
-    // Use hidden anchor to open to avoid blocking translation promise
-    mailtoLinkEl.href = mailto;
-    mailtoLinkEl.click();
-  };
+    actionBtn.onclick = async () => {
+      // Get current text from textarea (possibly edited)
+      const content = outputTextEl.value;
+      let englishBody;
+      if (currentLanguage === 'es') {
+        englishBody = await translateToEnglish(content);
+        // If translation fails or returns the same text, fall back to original English template
+        if (!englishBody || englishBody.trim() === content.trim()) {
+          englishBody = generatedEmailEn;
+        }
+      } else {
+        englishBody = content;
+      }
+      const mailtoBody = encodeURIComponent(englishBody);
+      const mailto = 'mailto:' + encodeURIComponent(generatedTo) + '?subject=' + encodeURIComponent(generatedSubject) + '&body=' + mailtoBody;
+      // Use hidden anchor to open to avoid blocking translation promise
+      mailtoLinkEl.href = mailto;
+      mailtoLinkEl.click();
+    };
 }
 
 // Generate letter body
@@ -937,7 +940,10 @@ function generateLetter() {
     let englishContent;
     if (currentLanguage === 'es') {
       englishContent = await translateToEnglish(content);
-      if (!englishContent) englishContent = content;
+      // If translation fails or returns identical text, use original English template
+      if (!englishContent || englishContent.trim() === content.trim()) {
+        englishContent = generatedLetterEn;
+      }
     } else {
       englishContent = content;
     }
