@@ -42,6 +42,7 @@ const translations = {
     , symbolPhone: 'must pick up a (gasp!) phone'
     , symbolCharges: 'site charges money for access or removal'
     , helpLanguageNote: 'Use the language selector to switch between English and Spanish. If you generate an email or letter in Spanish, the app will translate it back to English when you send or print.'
+    , shareJourney: 'Share Journey'
   },
   es: {
     name: 'Nombre',
@@ -79,6 +80,7 @@ const translations = {
     , symbolPhone: 'hay que levantar el teléfono'
     , symbolCharges: 'el sitio cobra dinero por acceso o eliminación'
     , helpLanguageNote: 'Use el selector de idioma para cambiar entre inglés y español. Si genera un correo o carta en español, la aplicación lo traducirá al inglés cuando lo envíe o imprima.'
+    , shareJourney: 'Compartir recorrido'
   }
 };
 
@@ -1234,6 +1236,31 @@ function reorderJourneySteps(brokerName, fromIndex, toIndex) {
   renderJourney(brokerName);
 }
 
+// Share the current journey via email to the Digital Ally Project
+function shareJourney() {
+  if (!selectedBroker) return;
+  const name = selectedBroker.name;
+  const sanitizedName = removeEmojis(name);
+  const journeyMap = loadDigitalJourneys();
+  const journey = journeyMap[name];
+  if (!journey) return;
+  const steps = currentLanguage === 'es' ? (journey.stepsEs || journey.stepsEn) : journey.stepsEn;
+  // Compose subject and body in English to ensure consistency for the recipient
+  const subject = `Feedback on ${sanitizedName} digital journey`;
+  let body = '';
+  body += `Hello Digital Ally Project team,\n\n`;
+  body += `I used the Data Broker Opt‑Out Helper to complete the digital journey for ${sanitizedName}. Below are the steps I followed:`;
+  body += '\n';
+  steps.forEach((step, idx) => {
+    body += `${idx + 1}. ${step}\n`;
+  });
+  body += '\nI found these steps ${journey.completed ? 'complete' : 'still in progress'}. Here are my comments and suggestions (please edit as needed):\n\n`;
+  // Open mailto link
+  const mailto = `mailto:contact@digitalally.org?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+  mailtoLinkEl.href = mailto;
+  mailtoLinkEl.click();
+}
+
 // Check remote repository for updated digital journeys (stub)
 async function checkForUpdates() {
   const now = Date.now();
@@ -1375,6 +1402,14 @@ async function init() {
       overlay.classList.add('hidden');
       // re-render categories to show completed check
       renderCategories(categories);
+    });
+  }
+
+  // Share journey feedback button
+  const shareBtn = document.getElementById('share-journey');
+  if (shareBtn) {
+    shareBtn.addEventListener('click', () => {
+      shareJourney();
     });
   }
 

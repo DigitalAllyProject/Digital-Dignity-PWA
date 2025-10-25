@@ -1,0 +1,198 @@
+{
+  "BeenVerified": {
+    "stepsEn": [
+      "Visit BeenVerified’s opt‑out page at https://www.beenverified.com/app/optout/search.",
+      "Enter your name and state, then search for your listing.",
+      "Select your listing and click “Proceed to Opt Out.”",
+      "Enter your email address, complete the CAPTCHA and submit the request.",
+      "Open the verification email and confirm your opt‑out.",
+      "Wait for final confirmation that your information has been removed."
+    ],
+    "stepsEs": [
+      "Visite la página de exclusión de BeenVerified en https://www.beenverified.com/app/optout/search.",
+      "Ingrese su nombre y estado, luego busque su registro.",
+      "Seleccione su registro y haga clic en “Proceed to Opt Out”.",
+      "Ingrese su correo electrónico, complete el CAPTCHA y envíe la solicitud.",
+      "Abra el correo de verificación y confirme su exclusión.",
+      "Espere la confirmación final de que su información ha sido eliminada."
+    ]
+  },
+  "CheckPeople": {
+    "stepsEn": [
+      "Go to https://www.checkpeople.com/opt-out.",
+      "Fill out the opt‑out form with your name and state; complete the CAPTCHA; click “Search.”",
+      "Locate your listing and click “Opt‑Out.”",
+      "Enter your email address, complete the CAPTCHA and send the confirmation email.",
+      "Open the confirmation link sent to your email and finish the removal request.",
+      "Wait 5–7 days for confirmation that your information has been removed."
+    ],
+    "stepsEs": [
+      "Vaya a https://www.checkpeople.com/opt-out.",
+      "Complete el formulario de exclusión con su nombre y estado; complete el CAPTCHA; haga clic en “Search”.",
+      "Ubique su registro y haga clic en “Opt‑Out”.",
+      "Ingrese su correo electrónico, complete el CAPTCHA y envíe el correo de confirmación.",
+      "Abra el enlace de confirmación enviado a su correo y finalice la solicitud de eliminación.",
+      "Espere de 5 a 7 días para la confirmación de que su información ha sido eliminada."
+    ]
+  },
+  "ClustrMaps": {
+    "stepsEn": [
+      "Visit https://clustrmaps.com/opt-out.",
+      "Search for your address or listing.",
+      "Submit the removal request and follow any prompts.",
+      "Check your email for confirmation."
+    ],
+    "stepsEs": [
+      "Visite https://clustrmaps.com/opt-out.",
+      "Busque su dirección o registro.",
+      "Envíe la solicitud de eliminación y siga las indicaciones.",
+      "Revise su correo para confirmación."
+    ]
+  },
+  "Dataveria": {
+    "stepsEn": [
+      "Search for your profile on Dataveria.",
+      "Copy your profile URL and submit it through the opt‑out form.",
+      "If the form doesn’t work, email support@federal-data.com with your profile URL and a screenshot.",
+      "Wait for confirmation of removal."
+    ],
+    "stepsEs": [
+      "Busque su perfil en Dataveria.",
+      "Copie la URL de su perfil y envíela a través del formulario de exclusión.",
+      "Si el formulario no funciona, envíe un correo a support@federal-data.com con la URL de su perfil y una captura de pantalla.",
+      "Espere la confirmación de la eliminación."
+    ]
+  },
+  "Intelius": {
+    "stepsEn": [
+      "Navigate to Intelius’s opt‑out page.",
+      "Search for your listing using your name and state.",
+      "Select your listing and submit the opt‑out form with your email.",
+      "Check your email for confirmation and complete the process.",
+      "If you need assistance, call 888‑445‑2727 or email help@intelius.com."
+    ],
+    "stepsEs": [
+      "Vaya a la página de exclusión de Intelius.",
+      "Busque su registro usando su nombre y estado.",
+      "Seleccione su registro y envíe el formulario de exclusión con su correo.",
+      "Revise su correo para confirmación y complete el proceso.",
+      "Si necesita ayuda, llame al 888-445-2727 o envíe un correo a help@intelius.com."
+    ]
+  },
+  "MyLife": {
+    "stepsEn": [
+      "Search for your profile on MyLife and copy the URL.",
+      "Use MyLife’s removal form (CCPA portal) to submit your information with the profile link.",
+      "Check your email and follow any instructions to confirm your request.",
+      "If not processed, email privacy@mylife.com or call 888‑704‑1900 with your profile link."
+    ],
+    "stepsEs": [
+      "Busque su perfil en MyLife y copie la URL.",
+      "Use el formulario de eliminación de MyLife (portal CCPA) para enviar su información con el enlace de su perfil.",
+      "Revise su correo y siga las instrucciones para confirmar su solicitud.",
+      "Si no se procesa, envíe un correo a privacy@mylife.com o llame al 888-704-1900 con el enlace de su perfil."
+    ]
+  },
+  "Nuwber": {
+    "stepsEn": [
+      "Go to Nuwber’s removal page.",
+      "Search for your record and use filters such as state to narrow the results.",
+      "Copy your profile URL and submit the removal form with your email; complete the CAPTCHA.",
+      "Check your email and confirm the removal.",
+      "If it doesn’t work, email support@nuwber.com with your details."
+    ],
+    "stepsEs": [
+      "Vaya a la página de eliminación de Nuwber.",
+      "Busque su registro y use filtros como el estado para reducir los resultados.",
+      "Copie la URL de su perfil y envíe el formulario de eliminación con su correo; complete el CAPTCHA.",
+      "Revise su correo y confirme la eliminación.",
+      "Si no funciona, envíe un correo a support@nuwber.com con sus datos."
+    ]
+  },
+  "PublicDataUSA": {
+    "stepsEn": [
+      "Visit PublicDataUSA and search for your information.",
+      "Copy the URL of your listing.",
+      "Click “Remove my info” or find the removal form and submit your details.",
+      "Wait for confirmation."
+    ],
+    "stepsEs": [
+      "Visite PublicDataUSA y busque su información.",
+      "Copie la URL de su registro.",
+      "Haga clic en “Remove my info” o encuentre el formulario de eliminación y envíe sus datos.",
+      "Espere la confirmación."
+    ]
+  },
+  "Radaris": {
+    "stepsEn": [
+      "Search for your profile on Radaris and open it.",
+      "Click “Control this profile” then choose “Remove info”.",
+      "Fill out the removal form with your email and follow the prompts.",
+      "Confirm the request via the email you receive.",
+      "If issues persist, email privacy@radaris.com with your profile URL."
+    ],
+    "stepsEs": [
+      "Busque su perfil en Radaris y ábralo.",
+      "Haga clic en “Control this profile” y luego elija “Remove info”.",
+      "Complete el formulario de eliminación con su correo y siga las instrucciones.",
+      "Confirme la solicitud mediante el correo que reciba.",
+      "Si persisten problemas, envíe un correo a privacy@radaris.com con la URL de su perfil."
+    ]
+  },
+  "SmartBackgroundChecks": {
+    "stepsEn": [
+      "Go to SmartBackgroundChecks and search for your information.",
+      "Select your listing and click the opt‑out option.",
+      "Provide your email and submit.",
+      "Confirm the removal via the email you receive."
+    ],
+    "stepsEs": [
+      "Vaya a SmartBackgroundChecks y busque su información.",
+      "Seleccione su registro y haga clic en la opción de exclusión.",
+      "Proporcione su correo y envíe.",
+      "Confirme la eliminación a través del correo que reciba."
+    ]
+  },
+  "Spokeo": {
+    "stepsEn": [
+      "Search for your listing on Spokeo and copy the profile URL.",
+      "Go to https://www.spokeo.com/opt_out.",
+      "Paste the profile URL, enter your email and complete the CAPTCHA.",
+      "Check your email and click the confirmation link.",
+      "Be aware that paid subscribers may still access your information."
+    ],
+    "stepsEs": [
+      "Busque su registro en Spokeo y copie la URL del perfil.",
+      "Vaya a https://www.spokeo.com/opt_out.",
+      "Pegue la URL del perfil, ingrese su correo y complete el CAPTCHA.",
+      "Revise su correo y haga clic en el enlace de confirmación.",
+      "Tenga en cuenta que los suscriptores de pago pueden seguir accediendo a su información."
+    ]
+  },
+  "That’s Them": {
+    "stepsEn": [
+      "Search for your listing on That’s Them.",
+      "Click the removal link (avoid the Spokeo link) to submit your request.",
+      "Follow any prompts and confirm via email if required."
+    ],
+    "stepsEs": [
+      "Busque su registro en That’s Them.",
+      "Haga clic en el enlace de eliminación (evite el enlace de Spokeo) para enviar su solicitud.",
+      "Siga las indicaciones y confirme por correo si es necesario."
+    ]
+  },
+  "Whitepages": {
+    "stepsEn": [
+      "Go to WhitePages and search for your listing; copy the listing URL.",
+      "Click the removal or suppression request link and follow the instructions.",
+      "You may need to verify your identity via a phone call; be prepared to provide your phone number.",
+      "Check 411.com for your information and request removal there if needed."
+    ],
+    "stepsEs": [
+      "Vaya a WhitePages y busque su registro; copie la URL del registro.",
+      "Haga clic en el enlace de eliminación o supresión y siga las instrucciones.",
+      "Es posible que deba verificar su identidad mediante una llamada telefónica; esté preparado para proporcionar su número.",
+      "Verifique 411.com para ver su información y solicite su eliminación allí si es necesario."
+    ]
+  }
+}
